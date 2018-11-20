@@ -1,0 +1,46 @@
+body {
+  background-color: #111;
+}
+
+.main-content {
+    padding: 40px 0;
+}
+
+#hero-stage {
+  // position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#hero-bottle {
+  position: relative;
+  width: 320px;
+  height: 320px * 2.536;
+}
+
+.layers {
+  img {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+
+#frost-1 {
+  // background-image: url('/images/1-herobottle.png');
+
+}
+
+#frost-2 {
+  // background-image: url('/images/2-herobottle.png');
+  filter: contrast(0.8);
+}
+
+#frost-3 {
+  // background-image: url('/images/3-herobottle.png');
+}
+
+#frost-4 {
+  // background-image: url('/images/4-herobottle.png');
+}
