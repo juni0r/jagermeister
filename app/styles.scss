@@ -7,34 +7,40 @@ body {
 }
 
 #hero-stage {
-  // position: relative;
   display: flex;
   flex-flow: column;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+  // background: #333;
 }
 
 #hero-bottle {
   position: relative;
-  width: 320px;
-  height: 320px * 2.536;
+  height: 80vh;
 }
 
 .layers {
-  img {
+  .layer:not(:last-child) {
     position: absolute;
-    width: 100%;
+ }
+
+  img {
+    height: 100%;
   }
 }
 
+#frost-1,
+#frost-2 {
+  filter: contrast(0.75) saturate(0.8);
+}
 
 #frost-1 {
   // background-image: url('/images/1-herobottle.png');
-
 }
 
 #frost-2 {
   // background-image: url('/images/2-herobottle.png');
-  filter: contrast(0.8);
 }
 
 #frost-3 {
