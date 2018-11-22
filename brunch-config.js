@@ -12,10 +12,9 @@ exports.files = {
 exports.plugins = {
   babel: { presets: ['latest', 'stage-0'] },
   sass: { mode: 'native' }
-
 };
 
 exports.npm = {
-  enabled: true,
-  globals: {
-  } };
+  enabled: false,
+  globals: {}
+};
