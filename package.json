@@ -5,6 +5,10 @@
   "author": "Brunch",
   "version": "0.0.1",
   "repository": "",
+  "engines": {
+    "node": "10.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "start": "LOGGY_STACKS=true brunch watch --server",
     "build": "brunch build --production",
