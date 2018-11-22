@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "brunch build --production",
-    "dev": "LOGGY_STACKS=true brunch watch --server",
+    "serve": "LOGGY_STACKS=true brunch watch --server",
     "postinstall": "yarn build"
   },
   "dependencies": {
