@@ -10,8 +10,9 @@
     "yarn": "1.x"
   },
   "scripts": {
-    "start": "LOGGY_STACKS=true brunch watch --server",
+    "start": "node server.js",
     "build": "brunch build --production",
+    "dev": "LOGGY_STACKS=true brunch watch --server",
     "postinstall": "yarn build"
   },
   "dependencies": {
