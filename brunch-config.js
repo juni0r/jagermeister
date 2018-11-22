@@ -18,8 +18,4 @@ exports.plugins = {
 exports.npm = {
   enabled: true,
   globals: {
-    jQuery: 'jquery',
-    $: 'jquery',
-    TimelineLite: 'gsap',
-    TweenLite: 'gsap'
   } };
