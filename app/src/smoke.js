@@ -83,15 +83,11 @@ export class Layer {
   }
 }
 
-export function Range ({ from, to, ease, jitter }) {
-  return (pos) => {
-    if (ease) pos = ease.getRatio(pos);
-    let value = from + ((to - from) * pos);
-    if (jitter) {
-      value += jitter - Math.random() * jitter * 2;
-    }
-    return value;
-  }
+export const Linear = x => x;
+
+export function Range ({ from, to, scale = Linear }) {
+  const range = to - from;
+  return value => from + (range * scale(value));
 }
 
 export class LayerGenerator {
@@ -99,9 +95,12 @@ export class LayerGenerator {
     this.ranges = ranges;
   }
 
-  get (pos) {
+  get (value) {
     const variant = {};
-    Object.keys(this.ranges).forEach((key) => { variant[key] = this.ranges[key](pos) });
+    // Object.keys(this.ranges).forEach((key) => { variant[key] = this.ranges[key](value) });
+    Object.entries(this.ranges).forEach(([key, range]) => {
+      variant[key] = range(value);
+    });
     return variant;
   }
 
