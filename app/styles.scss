@@ -4,10 +4,6 @@ body {
   position: relative;
 }
 
-.spacer {
-  // background-color: #222;
-}
-
 .main-content {
     padding: 40px 0;
 }
@@ -20,8 +16,6 @@ body {
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  // height: 100vh;
-  // background: #333;
 }
 
 #hero-bottle {
@@ -34,7 +28,6 @@ body {
   
   .layer {
     width: 100%;
-    // height: 720px;
   }
 }
 
@@ -77,8 +70,6 @@ $layerSize: 1280px;
   left: calc(50vw - 160px);
   z-index: 1200;
   filter: contrast(0.7) saturate(1);
-  // background-image: url('/images/4-herobottle.png');
-  // background-size: contain;
 
   img {
     width: 100%;
