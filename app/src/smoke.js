@@ -57,16 +57,15 @@ export class Layer {
       opacity: 1
     }, props);
 
-    this.el = $('<div class="layer">').css({
-      opacity: this.opacity,
-      zIndex: this.zIndex
-    });
+    this.el = $('<div class="layer">');
 
     TweenMax.set(this.el, {
       x: this.x,
       y: this.y,
       scale: this.scale,
-      rotation: this.rotation
+      rotation: this.rotation,
+      opacity: this.opacity,
+      zIndex: this.zIndex
     })
   }
 
@@ -84,19 +83,12 @@ export class Layer {
   }
 }
 
-export function Ease (exp) {
-  return {
-    in: (x) => Math.pow(x, exp),
-    out: (x) => 1 - Math.pow(Math.abs(x - 1), exp)
-  }
-}
-
-export function Range ({ from, to, scale, jitter }) {
-  return function (pos) {
-    const scaled = scale ? scale(pos) : pos;
-    let value = from + ((to - from) * scaled);
+export function Range ({ from, to, ease, jitter }) {
+  return (pos) => {
+    if (ease) pos = ease.getRatio(pos);
+    let value = from + ((to - from) * pos);
     if (jitter) {
-      value = value + jitter - Math.random() * jitter * 2;
+      value += jitter - Math.random() * jitter * 2;
     }
     return value;
   }

@@ -20,7 +20,7 @@ body {
 
 #hero-bottle {
   position: relative;
-  z-index: 1200;
+  z-index: 1300;
 
   .layer:not(:last-child) {
     position: absolute;
@@ -31,11 +31,9 @@ body {
   }
 }
 
-#frost-1 {
-  filter: contrast(0.8);
-}
+#frost-1 ,
 #frost-2 {
-  filter: contrast(0.7) saturate(0.9);
+  filter: contrast(0.7) saturate(0.8);
 }
 
 $layerSize: 1280px;
