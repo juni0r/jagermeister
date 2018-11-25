@@ -18,15 +18,17 @@ $(() => {
 
   TweenMax.set([ smoke, frost1, frost2 ], { opacity: 0 });
 
+  const chill = TweenMax.to(frost1, 1, { opacity: 0.67, ease: Linear.easeInOut });
+
   const freeze = new Timeline({ paused: false })
     .to(smoke, 0, { opacity: 1 })
     .to(frost2, 1.5, { opacity: 1, ease: Quad.easeOut })
-    .staggerFrom('#smoke >.layer', 1, { x: 20, y: '-=50', opacity: 0, ease: Quad.easeOut }, 0.025, '-=2');
+    .staggerFrom('#smoke >.layer', 2, { x: 0, y: '-=100', opacity: 0, ease: Quad.easeOut }, 0.05, '-=2');
 
   addScene('#ease-start', {
     pin: '#hero-stage',
     duration: 800,
-    tween: TweenMax.to(frost1, 1, { opacity: 0.67, ease: Linear.easeInOut })
+    tween: chill
   });
 
   addScene('#freeze-keep', {
@@ -58,7 +60,7 @@ function setupSmoke (selector) {
 
   const layers = [];
 
-  const layerCount = 25;
+  const layerCount = 50;
 
   const xFrom = 80;
   const xTo = 120;
@@ -66,7 +68,7 @@ function setupSmoke (selector) {
   const rpsFrom = 30;
   const rpsTo = 0;
 
-  const ease = Quad.easeIn;
+  const ease = Quad.easeIn.getRatio;
 
   let generator = new LayerGenerator({
     x: Range({ from: xFrom, to: xTo, ease }),
@@ -74,15 +76,16 @@ function setupSmoke (selector) {
     opacity: Range({ from: 1, to: 0, ease }),
     scale: Range({ from: 0.15, to: 0.5, ease }),
     rps: Range({ from: rpsFrom, to: rpsTo, ease }),
-    zIndex: Range({ from: 999, to: 1999, ease }),
+    zIndex: Range({ from: 0, to: 999, ease }),
     rotation: () => (Math.random() * 360)
   });
 
-  generator.make(layerCount, layers);
+  generator.make(layerCount / 2, layers);
 
   generator.ranges.x = Range({ from: -xFrom, to: -xTo, ease });
   generator.ranges.rps = Range({ from: -rpsFrom, to: -rpsTo, ease });
-  generator.make(layerCount, layers);
+
+  generator.make(layerCount / 2, layers);
 
   layers.sort((a, b) => a.zIndex - b.zIndex)
 

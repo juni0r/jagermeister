@@ -20,14 +20,14 @@ body {
 
 #hero-bottle {
   position: relative;
-  z-index: 1300;
-
-  .layer:not(:last-child) {
-    position: absolute;
-  }
+  z-index: 500;
   
   .layer {
     width: 100%;
+  }
+
+  .layer:not(:last-child) {
+    position: absolute;
   }
 }
 
