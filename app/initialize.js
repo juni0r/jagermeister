@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import TweenMax, { TimelineMax as Timeline, Linear, Quad, Expo, Cubic } from 'gsap';
+import TweenMax, { TimelineMax as Timeline, Linear, Quad, Expo } from 'gsap';
 import ScrollMagic from 'scrollmagic';
 import 'scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js';
 import 'scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js';
