@@ -30,6 +30,10 @@ body {
   .layer:not(:last-child) {
     position: absolute;
   }
+
+  &.invisible .layer {
+    visibility: hidden;
+  } 
 }
 
 #frost-1 ,
@@ -41,7 +45,7 @@ $layerSize: 1280px;
 
 #smoke {
   position: absolute;
-  height: 260px;
+  height: 340px;
 
   .layer {
     position: absolute;
