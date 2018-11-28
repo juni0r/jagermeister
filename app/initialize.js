@@ -56,12 +56,12 @@ $(() => {
 
   const freeze = new Timeline({ paused: false })
     .to(smoke, 0, { opacity: 1 })
+    .addLabel('start')
     .to(frost2, 2, { opacity: 1, ease: Quad.easeOut })
-    .addLabel('start', '-=2.5')
     .from(smokeLeft, 2, { x: 50, rotate: 30 }, 'start')
     .from(smokeRight, 2, { x: -50, rotate: -30 }, 'start')
-    .staggerFrom(`${smokeRight} .layer`, 5, { opacity: 0, ease: Quad.easeOut }, 0.1, 'start')
-    .staggerFrom(`${smokeLeft} .layer`, 5, { opacity: 0, ease: Quad.easeOut }, 0.1, 'start');
+    .staggerFrom(`${smokeRight} .layer`, 3, { opacity: 0, ease: Quad.easeOut }, 0.05, 'start')
+    .staggerFrom(`${smokeLeft} .layer`, 3, { opacity: 0, ease: Quad.easeOut }, 0.05, 'start');
 
   addScene('#ease-start', {
     pin: '#hero-stage',
