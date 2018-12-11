@@ -1,19 +1,7 @@
 import $ from 'jquery';
-import TweenMax, { TimelineMax as Timeline, Linear, Quad, Expo } from 'gsap';
-import ScrollMagic from 'scrollmagic';
-import 'scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js';
-import 'scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js';
+import TweenMax, { TimelineMax, Linear, Quad } from 'gsap';
+import { addScene } from 'src/scrollmagic';
 import 'src/smoke';
-
-window.$ = $;
-window.Timeline = Timeline;
-window.Tween = TweenMax;
-window.Quad = Quad;
-window.Expo = Expo;
-
-function QuadEaseIn (fn) {
-  return v => fn(Quad.easeIn.getRatio(v));
-}
 
 $(() => {
   const smoke = $('#smoke');
@@ -21,74 +9,40 @@ $(() => {
   const smokeLeft = '#smoke-left';
   const smokeRight = '#smoke-right';
 
-  const rps = v => 5 + (1 - v) * 40;
+  const rps = v => 5 + (1 - v) * 30;
+  const count = 30;
 
-  const smokeProps = {
-    rps,
-    count: 30,
-    y: QuadEaseIn(v => v * 550),
-    rotation: v => Math.random() * 360,
-    scale: QuadEaseIn(v => 0.08 + v / 2.5),
-    opacity: QuadEaseIn(v => 1.2 - v)
-  };
+  $(smokeLeft).smoke({ count, rps: x => -rps(x) });
+  $(smokeRight).smoke({ count, rps });
 
-  const rotate = 10;
-  const translateX = 120;
+  const layer1 = '.layer-1';
+  const layer2 = '.layer-2';
 
-  $(smokeLeft)
-    .smoke(smokeProps)
-    .css({
-      transform: `rotate(${rotate}deg) translateX(${translateX}px)`
-    });
+  TweenMax.set([ smoke, layer1, layer2 ], { opacity: 0 });
 
-  $(smokeRight)
-    .smoke({ ...smokeProps, rps: v => -rps(v) })
-    .css({
-      transform: `rotate(${-rotate}deg) translateX(${-translateX}px)`
-    });
+  const chill = TweenMax.to(layer1, 1, { opacity: 0.67, ease: Linear.easeInOut });
 
-  const frost1 = '#frost-1';
-  const frost2 = '#frost-2';
-
-  TweenMax.set([ smoke, frost1, frost2 ], { opacity: 0 });
-
-  const chill = TweenMax.to(frost1, 1, { opacity: 0.67, ease: Linear.easeInOut });
-
-  const freeze = new Timeline({ paused: false })
+  const freeze = new TimelineMax({ paused: false })
     .to(smoke, 0, { opacity: 1 })
     .addLabel('start')
-    .to(frost2, 2, { opacity: 1, ease: Quad.easeOut })
-    .from(smokeLeft, 2, { x: 50, rotate: 30 }, 'start')
-    .from(smokeRight, 2, { x: -50, rotate: -30 }, 'start')
+    .to(layer2, 2, { opacity: 1, ease: Quad.easeOut })
     .staggerFrom(`${smokeRight} .layer`, 3, { opacity: 0, ease: Quad.easeOut }, 0.05, 'start')
-    .staggerFrom(`${smokeLeft} .layer`, 3, { opacity: 0, ease: Quad.easeOut }, 0.05, 'start');
+    .staggerFrom(`${smokeLeft} .layer`, 3, { opacity: 0, ease: Quad.easeOut }, 0.05, 'start')
 
-  addScene('#ease-start', {
+  addScene('#freeze-start', {
     pin: '#hero-stage',
     duration: 800,
     tween: chill
   });
 
-  addScene('#freeze-keep', {
+  addScene('#freeze-start', {
     pin: '#hero-stage',
-    duration: 800,
+    duration: 400,
     offset: 800
   });
 
-  addScene('#freeze-start', {
+  addScene('#smoke-start', {
     offset: 800,
     tween: freeze
   });
 });
-
-const debugScrollMagic = false;
-const controller = new ScrollMagic.Controller();
-
-function addScene (triggerElement, { duration = 0, offset = 0, triggerHook = 'onLeave', tween, pin }) {
-  const scene = new ScrollMagic.Scene({ triggerElement, triggerHook, duration, offset });
-  if (pin) scene.setPin(pin);
-  if (tween) scene.setTween(tween);
-  if (debugScrollMagic) scene.addIndicators({ name: triggerElement });
-  scene.addTo(controller);
-  return scene;
-}

@@ -10,21 +10,28 @@
         <script src="/app.js"></script>
         <script>require('initialize');</script>
     </head>
-    <body>
+    <body class="sandbox">
       <div class="spacer" style="height: 100vh;"></div>
-      <div id="ease-start"></div>
-      <div id="freeze-keep"></div>
       <div id="freeze-start"></div>
+      <div id="smoke-start"></div>
       <div id="hero-stage">
-        <div id="smoke">
-          <div id="smoke-left"></div>
-          <div id="smoke-right"></div>
-        </div>
         <div id="hero-bottle">
-          <img id="bottle" class="layer" src="/images/1-herobottle.png">
-          <img id="frost-1" class="layer" src="/images/2-herobottle.png">
-          <img id="frost-2" class="layer" src="/images/4-herobottle.png">
-        </div>
+          <div id="smoke">
+            <div class="smoke" id="smoke-left">
+              <div class="smoke-start"></div>
+              <div class="smoke-end"></div>
+            </div>
+            <div class="smoke" id="smoke-right">
+              <div class="smoke-start"></div>
+              <div class="smoke-end"></div>
+            </div>
+          </div>
+          <div id="bottle" class="invisibleX">
+            <img class="layer layer-0" src="/images/1-herobottle.png">
+            <img class="layer layer-1" src="/images/2-herobottle.png">
+            <img class="layer layer-2" src="/images/3-herobottle.png">
+          </div>
+        </div>  
       </div>
       <div class="spacer" style="height: 150vh;"></div>
     </body>

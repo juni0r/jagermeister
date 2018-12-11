@@ -15,6 +15,5 @@ exports.plugins = {
 };
 
 exports.npm = {
-  enabled: true,
-  globals: {}
+  enabled: true
 };
